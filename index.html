@@ -18,6 +18,8 @@
     let belanja = [
       { produk: "Kemeja Pria", stock: 10, harga: 120000 },
       { produk: "Celana Jeans Pria", stock: 5, harga: 200000 },
+      { produk: "Sepatu Air Jordan High", stock: 3, harga: 2000000 },
+      { produk: "Sepatu Yeezy", stock: 5, harga: 4000000 },
     ];
     let tampilanBelanja = "";
 
@@ -38,28 +40,46 @@
     let menu = 0;
     while (menu != 3) {
       menu = prompt(`
-1. menu
-2. keranjang
-3. exit`);
+    1. menu
+    2. keranjang
+    3. exit`);
 
       if (menu == "1") {
         let opt = parseInt(prompt(tampilanBelanja));
-        if (opt > 0 && opt < 9) {
+        if (opt > 0 && opt < 5) {
           let item = belanja[opt - 1];
           let qty = parseInt(prompt("qty brp?"));
-          console.log(item);
+          // console.log(item);
           qty > item.stock || qty < 0
             ? alert("input ngaco")
             : keranjang.push(new Keranjang(item.produk, qty, item.harga));
         }
       } else if (menu == 2) {
-        console.log(keranjang);
+        let tKeranjang = "";
+        for (let i = 0; i < keranjang.length; i++) {
+          // for (let j = 0; j < keranjang.length; j++) {
+          tKeranjang += `\n[${i + 1}]Produk: ${keranjang[i].produk}, Harga: ${
+            keranjang[i].harga
+          }, Qty: ${keranjang[i].qty}`;
+          // }
+        }
+        let menu2 = `\nOption:\n1. checkout
+2. delete => delete item => 1-4 nomor barang
+3. edit qty => edit qty item tidak boleh melebihi stock/0
+4. back`;
+
+        let option2 = 0;
+        option2 = prompt(`${tKeranjang} \n${menu2}`);
+        if (option2 == 1) {
+          prompt("prompt checkout");
+        }
+        // console.log(keranjang);
+        // console.log(tKeranjang);
       } else if (menu == 3) {
         alert("terima kasih sudah berkunjung");
       } else {
         alert("menu belum dibuat");
       }
     }
-    console.log("whatever");
   </script>
 </html>
