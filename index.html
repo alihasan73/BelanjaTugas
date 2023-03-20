@@ -1,115 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Exercise</title>
-	</head>
-	<body></body>
-	<script>
-		class Keranjang {
-			constructor(produk, qty, harga) {
-				this.produk = produk;
-				this.qty = qty;
-				this.harga = harga;
-			}
-		}
-		let belanja = [
-			{ produk: "Kemeja Pria", stock: 10, harga: 120000 },
-			{ produk: "Celana Jeans Pria", stock: 5, harga: 200000 },
-			{ produk: "Sepatu Air Jordan High", stock: 3, harga: 2000000 },
-			{ produk: "Sepatu Yeezy", stock: 5, harga: 4000000 },
-		];
-		let tampilanBelanja = "";
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise</title>
+  </head>
+  <body></body>
+  <script>
+    class Keranjang {
+      constructor(produk, qty, harga) {
+        this.produk = produk;
+        this.qty = qty;
+        this.harga = harga;
+      }
+    }
+    let belanja = [
+      { produk: "Kemeja Pria", stock: 10, harga: 120000 },
+      { produk: "Celana Jeans Pria", stock: 5, harga: 200000 },
+      { produk: "Sepatu Air Jordan High", stock: 3, harga: 2000000 },
+      { produk: "Sepatu Yeezy", stock: 5, harga: 4000000 },
+    ];
+    let tampilanBelanja = "";
 
-		belanja.forEach((val, index) => {
-			tampilanBelanja +=
-				index +
-				1 +
-				". " +
-				val.produk +
-				" Stock " +
-				val.stock +
-				" Rp.@" +
-				val.harga.toLocaleString("id-ID") +
-				"\n";
-		});
+    belanja.forEach((val, index) => {
+      tampilanBelanja +=
+        index +
+        1 +
+        ". " +
+        val.produk +
+        " Stock " +
+        val.stock +
+        " Rp.@" +
+        val.harga.toLocaleString("id-ID") +
+        "\n";
+    });
 
-		let keranjang = [];
-		let menu = 0;
-		while (menu != 3) {
-			menu = prompt(`
+    let keranjang = [];
+    let menu = 0;
+    while (menu != 3) {
+      menu = prompt(`
 1. menu
 2. keranjang
 3. exit`);
 
-			if (menu == "1") {
-				let opt = parseInt(prompt(tampilanBelanja));
-				if (opt > 0 && opt < 5) {
-					let item = belanja[opt - 1];
-					let qty = parseInt(prompt("qty brp?"));
-					// console.log(item);
-					qty > item.stock || qty < 0
-						? alert("input ngaco")
-						: keranjang.push(
-								new Keranjang(item.produk, qty, item.harga)
-						  );
-				}
-			} else if (menu == 2) {
-				let tKeranjang = "";
-				for (let i = 0; i < keranjang.length; i++) {
-					// for (let j = 0; j < keranjang.length; j++) {
-					tKeranjang += `\n[${i + 1}]Produk: ${
-						keranjang[i].produk
-					}, Harga: ${keranjang[i].harga}, Qty: ${keranjang[i].qty}`;
-					// }
-				}
-				let menu2 = `\nOption:\n1. checkout
-2. delete => delete item => 1-4 nomor barang
-3. edit qty => edit qty item tidak boleh melebihi stock/0
-4. back`;
+      if (menu == "1") {
+        let opt = parseInt(prompt(tampilanBelanja));
+        if (opt > 0 && opt < 5) {
+          let item = belanja[opt - 1];
+          let qty = parseInt(prompt("qty brp?"));
+          // console.log(item);
+          qty > item.stock || qty < 0
+            ? alert("input ngaco")
+            : keranjang.push(new Keranjang(item.produk, qty, item.harga));
+        }
+      } else if (menu == 2) {
+        let tKeranjang = "";
+        for (let i = 0; i < keranjang.length; i++) {
+          // for (let j = 0; j < keranjang.length; j++) {
+          tKeranjang += `\n[${i + 1}]Produk: ${keranjang[i].produk}, Harga: ${
+            keranjang[i].harga
+          }, Qty: ${keranjang[i].qty}`;
+          // }
+        }
+        let menu2 = `\nOption:\n1. checkout
+    2. delete => delete item => 1-4 nomor barang
+    3. edit qty => edit qty item tidak boleh melebihi stock/0
+    4. back`;
 
-				let option2 = 0;
-				option2 = prompt(`${tKeranjang} \n${menu2}`);
-				if (option2 == 1) {
-					let sumTotal = [];
-					let akhir = 0;
-					for (let i = 0; i < keranjang.length; i++) {
-						sumTotal.push(keranjang[i].harga * keranjang[i].qty);
-					}
-					let total = (acc, val) => acc + val;
-					let total2 = sumTotal.reduce(total);
-					console.log(total2);
-					console.log(sumTotal);
-					prompt(`Total belanja = ${total2}`);
-					prompt("prompt checkout");
-				} else if (option2 == 2) {
-					let tKeranjang = "";
-					for (let i = 0; i < keranjang.length; i++) {
-						// for (let j = 0; j < keranjang.length; j++) {
-						tKeranjang += `\n[${i + 1}]Produk: ${
-							keranjang[i].produk
-						}, Harga: ${keranjang[i].harga}, Qty: ${
-							keranjang[i].qty
-						}`;
-						// }
-					}
+        let option2 = 0;
+        option2 = prompt(`${tKeranjang} \n${menu2}`);
+        if (option2 == 1) {
+          let sumTotal = [];
+          let akhir = 0;
+          for (let i = 0; i < keranjang.length; i++) {
+            sumTotal.push(keranjang[i].harga * keranjang[i].qty);
+          }
+          let total = (acc, val) => acc + val;
+          let total2 = sumTotal.reduce(total);
+          console.log(total2);
+          console.log(sumTotal);
+          prompt(`Total belanja = ${total2}`);
+        } else if (option2 == 2) {
+          let tKeranjang = "";
+          for (let i = 0; i < keranjang.length; i++) {
+            // for (let j = 0; j < keranjang.length; j++) {
+            tKeranjang += `\n[${i + 1}]Produk: ${keranjang[i].produk}, Harga: ${
+              keranjang[i].harga
+            }, Qty: ${keranjang[i].qty}`;
+            // }
+          }
 
-					let delIndex = prompt(
-						`${tKeranjang} \n Pilih barang yang akan dihapus:`
-					);
+          let delIndex = prompt(
+            `${tKeranjang} \n Pilih barang yang akan dihapus:`
+          );
 
-					let hasil = delIndex - 1;
-					if (hasil > -1) {
-						keranjang.splice(hasil, 1);
-					}
-				}
-			} else if (menu == 3) {
-				alert("terima kasih sudah berkunjung");
-			} else {
-				alert("menu belum dibuat");
-			}
-		}
-	</script>
+          let hasil = delIndex - 1;
+          if (hasil > -1) {
+            keranjang.splice(hasil, 1);
+          }
+        } else if (option2 == 3) {
+          let option2n = prompt(`Wich One?:${tKeranjang}`);
+          if (option2n == 1) {
+            let option21 = prompt(`What to do:${tKeranjang}
+                Option:
+              1. increase qty
+              2. decrease qty
+                `);
+            if (option21 == 1) {
+              keranjang[0].qty++;
+            } else if (option21 == 2) {
+              keranjang[0].qty--;
+            }
+          } else if (option2n == 2) {
+            let option22 = prompt(`What to do:${tKeranjang}
+                Option:
+              1. increase qty
+              2. decrease qty
+                `);
+            if (option22 == 1) {
+              keranjang[1].qty++;
+            } else if (option22 == 2) {
+              keranjang[1].qty--;
+            }
+          } else if (option2n == 3) {
+            let option23 = prompt(`What to do:${tKeranjang}
+                Option:
+              1. increase qty
+              2. decrease qty
+                `);
+            if (option23 == 1) {
+              keranjang[2].qty++;
+            } else if (option23 == 2) {
+              keranjang[2].qty--;
+            }
+          } else if (option2n == 4) {
+            let option24 = prompt(`What to do:${tKeranjang}
+                Option:
+              1. increase qty
+              2. decrease qty
+                `);
+            if (option24 == 1) {
+              keranjang[3].qty++;
+            } else if (option24 == 2) {
+              keranjang[3].qty--;
+            }
+          }
+        }
+      } else if (menu == 3) {
+        alert("terima kasih sudah berkunjung");
+      } else {
+        alert("menu belum dibuat");
+      }
+    }
+  </script>
 </html>
