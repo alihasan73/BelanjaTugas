@@ -52,17 +52,15 @@
 					// console.log(item);
 					qty > item.stock || qty < 0
 						? alert("input ngaco")
-						: keranjang.push(
-								new Keranjang(item.produk, qty, item.harga)
-						  );
+						: keranjang.push(new Keranjang(item.produk, qty, item.harga));
 				}
 			} else if (menu == 2) {
 				let tKeranjang = "";
 				for (let i = 0; i < keranjang.length; i++) {
 					// for (let j = 0; j < keranjang.length; j++) {
-					tKeranjang += `\n[${i + 1}]Produk: ${
-						keranjang[i].produk
-					}, Harga: ${keranjang[i].harga}, Qty: ${keranjang[i].qty}`;
+					tKeranjang += `\n[${i + 1}]Produk: ${keranjang[i].produk}, Harga: ${
+						keranjang[i].harga
+					}, Qty: ${keranjang[i].qty}`;
 					// }
 				}
 				let menu2 = `\nOption:\n1. checkout
@@ -74,9 +72,25 @@
 				option2 = prompt(`${tKeranjang} \n${menu2}`);
 				if (option2 == 1) {
 					prompt("prompt checkout");
+				} else if (option2 == 2) {
+					let tKeranjang = "";
+					for (let i = 0; i < keranjang.length; i++) {
+						// for (let j = 0; j < keranjang.length; j++) {
+						tKeranjang += `\n[${i + 1}]Produk: ${keranjang[i].produk}, Harga: ${
+							keranjang[i].harga
+						}, Qty: ${keranjang[i].qty}`;
+						// }
+					}
+
+					let delIndex = prompt(
+						`${tKeranjang} \n Pilih barang yang akan dihapus:`
+					);
+
+					let hasil = delIndex - 1;
+					if (hasil > -1) {
+						keranjang.splice(hasil, 1);
+					}
 				}
-				// console.log(keranjang);
-				// console.log(tKeranjang);
 			} else if (menu == 3) {
 				alert("terima kasih sudah berkunjung");
 			} else {
