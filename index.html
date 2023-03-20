@@ -40,9 +40,9 @@
     let menu = 0;
     while (menu != 3) {
       menu = prompt(`
-        1. menu
-        2. keranjang
-        3. exit`);
+1. menu
+2. keranjang
+3. exit`);
 
       if (menu == "1") {
         let opt = parseInt(prompt(tampilanBelanja));
@@ -71,8 +71,35 @@
         let option2 = 0;
         option2 = prompt(`${tKeranjang} \n${menu2}`);
         if (option2 == 1) {
+          let sumTotal = [];
+          let akhir = 0;
+          for (let i = 0; i < keranjang.length; i++) {
+            sumTotal.push(keranjang[i].harga * keranjang[i].qty);
+          }
+          let total = (acc, val) => acc + val;
+          let total2 = sumTotal.reduce(total);
+          console.log(total2);
+          console.log(sumTotal);
+          prompt(`Total belanja = ${total2}`);
           prompt("prompt checkout");
         } else if (option2 == 2) {
+          let tKeranjang = "";
+          for (let i = 0; i < keranjang.length; i++) {
+            // for (let j = 0; j < keranjang.length; j++) {
+            tKeranjang += `\n[${i + 1}]Produk: ${keranjang[i].produk}, Harga: ${
+              keranjang[i].harga
+            }, Qty: ${keranjang[i].qty}`;
+            // }
+          }
+
+          let delIndex = prompt(
+            `${tKeranjang} \n Pilih barang yang akan dihapus:`
+          );
+
+          let hasil = delIndex - 1;
+          if (hasil > -1) {
+            keranjang.splice(hasil, 1);
+          }
         } else if (option2 == 3) {
           let option2n = prompt(`Wich One?:${tKeranjang}`);
           if (option2n == 1) {
