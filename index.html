@@ -83,6 +83,27 @@
 					console.log(total2);
 					console.log(sumTotal);
 					prompt(`Total belanja = ${total2}`);
+					prompt("prompt checkout");
+				} else if (option2 == 2) {
+					let tKeranjang = "";
+					for (let i = 0; i < keranjang.length; i++) {
+						// for (let j = 0; j < keranjang.length; j++) {
+						tKeranjang += `\n[${i + 1}]Produk: ${
+							keranjang[i].produk
+						}, Harga: ${keranjang[i].harga}, Qty: ${
+							keranjang[i].qty
+						}`;
+						// }
+					}
+
+					let delIndex = prompt(
+						`${tKeranjang} \n Pilih barang yang akan dihapus:`
+					);
+
+					let hasil = delIndex - 1;
+					if (hasil > -1) {
+						keranjang.splice(hasil, 1);
+					}
 				}
 			} else if (menu == 3) {
 				alert("terima kasih sudah berkunjung");
